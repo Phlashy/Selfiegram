@@ -34,10 +34,10 @@
             </objects>
             <point key="canvasLocation" x="1301" y="162"/>
         </scene>
-        <!--View Controller-->
+        <!--Profile View Controller-->
         <scene sceneID="LFE-d9-cwY">
             <objects>
-                <viewController id="QYh-Zn-mfd" sceneMemberID="viewController">
+                <viewController id="QYh-Zn-mfd" customClass="ProfileViewController" customModule="Selfiegram" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="DxD-8c-ks5"/>
                         <viewControllerLayoutGuide type="bottom" id="NBE-r5-qOZ"/>
@@ -45,9 +45,43 @@
                     <view key="view" contentMode="scaleToFill" id="vUs-Os-NnL">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="dSb-Dy-aPf">
+                                <rect key="frame" x="210" y="110" width="180" height="185"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="185" id="N6P-KV-M6p"/>
+                                    <constraint firstAttribute="width" constant="180" id="NV1-N0-axp"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yVj-Id-83k">
+                                <rect key="frame" x="210" y="303" width="54" height="30"/>
+                                <state key="normal" title="Camera"/>
+                                <connections>
+                                    <action selector="cameraButtonPressed:" destination="QYh-Zn-mfd" eventType="touchUpInside" id="cEv-KL-s1H"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u14-yG-ziA">
+                                <rect key="frame" x="260.5" y="325" width="79" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="u14-yG-ziA" firstAttribute="top" secondItem="dSb-Dy-aPf" secondAttribute="bottom" constant="30" id="7pd-VH-suM"/>
+                            <constraint firstItem="dSb-Dy-aPf" firstAttribute="leading" secondItem="yVj-Id-83k" secondAttribute="leading" id="DsK-os-4vF"/>
+                            <constraint firstItem="u14-yG-ziA" firstAttribute="centerX" secondItem="vUs-Os-NnL" secondAttribute="centerX" id="G5S-9z-l9x"/>
+                            <constraint firstItem="dSb-Dy-aPf" firstAttribute="top" secondItem="DxD-8c-ks5" secondAttribute="bottom" constant="46" id="LQQ-Bh-0EC"/>
+                            <constraint firstItem="dSb-Dy-aPf" firstAttribute="centerX" secondItem="vUs-Os-NnL" secondAttribute="centerX" id="nFj-yv-XT3"/>
+                            <constraint firstItem="yVj-Id-83k" firstAttribute="top" secondItem="dSb-Dy-aPf" secondAttribute="bottom" constant="8" id="y8b-fj-pXH"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="BCO-OI-uI1"/>
+                    <connections>
+                        <outlet property="profileImageView" destination="dSb-Dy-aPf" id="h5E-Pu-9Xe"/>
+                        <outlet property="usernameLabel" destination="u14-yG-ziA" id="6Y3-MJ-0HL"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EoO-7J-bs8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -172,5 +206,6 @@
         <image name="Activities" width="25" height="25"/>
         <image name="NewsFeed" width="25" height="25"/>
         <image name="Profile" width="25" height="25"/>
+        <image name="placeholder" width="256" height="256"/>
     </resources>
 </document>
