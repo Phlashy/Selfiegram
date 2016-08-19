@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Table View Controller-->
@@ -112,22 +113,56 @@
             </objects>
             <point key="canvasLocation" x="-452" y="162"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Feed Table View Controller-->
         <scene sceneID="IMa-d9-eSW">
             <objects>
-                <tableViewController id="Oxa-4Z-Va6" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="4Iy-R1-pjK">
+                <tableViewController id="Oxa-4Z-Va6" customClass="FeedTableViewController" customModule="Selfiegram" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="320" sectionHeaderHeight="28" sectionFooterHeight="28" id="4Iy-R1-pjK">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="TGq-zN-0ZN">
-                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="postCell" rowHeight="320" id="TGq-zN-0ZN" customClass="SelfieCell" customModule="Selfiegram" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="92" width="600" height="320"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TGq-zN-0ZN" id="rQv-4c-3KJ">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="319.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xuY-yy-FYr">
+                                            <rect key="frame" x="8" y="8" width="584" height="250"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="250" id="weK-hp-oXZ"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mlS-Ja-ce6">
+                                            <rect key="frame" x="8" y="266" width="79" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Comment" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZcC-z9-47U">
+                                            <rect key="frame" x="8" y="295" width="75" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="xuY-yy-FYr" firstAttribute="top" secondItem="rQv-4c-3KJ" secondAttribute="topMargin" id="1kI-Z8-I19"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="xuY-yy-FYr" secondAttribute="trailing" id="8cm-hw-ojP"/>
+                                        <constraint firstItem="mlS-Ja-ce6" firstAttribute="top" secondItem="xuY-yy-FYr" secondAttribute="bottom" constant="8" id="AkU-HY-QiW"/>
+                                        <constraint firstItem="ZcC-z9-47U" firstAttribute="leading" secondItem="rQv-4c-3KJ" secondAttribute="leadingMargin" id="HOp-iC-cC1"/>
+                                        <constraint firstItem="ZcC-z9-47U" firstAttribute="top" secondItem="mlS-Ja-ce6" secondAttribute="bottom" constant="8" id="YYy-4L-K8V"/>
+                                        <constraint firstItem="xuY-yy-FYr" firstAttribute="leading" secondItem="rQv-4c-3KJ" secondAttribute="leadingMargin" id="rOX-dI-AmM"/>
+                                        <constraint firstItem="mlS-Ja-ce6" firstAttribute="leading" secondItem="rQv-4c-3KJ" secondAttribute="leadingMargin" id="tfj-Vh-cLf"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="commentLabel" destination="ZcC-z9-47U" id="Zba-xs-0eV"/>
+                                    <outlet property="selfieImageView" destination="xuY-yy-FYr" id="s93-3j-G2z"/>
+                                    <outlet property="usernameLabel" destination="mlS-Ja-ce6" id="9QO-cS-xes"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -135,7 +170,14 @@
                             <outlet property="delegate" destination="Oxa-4Z-Va6" id="ncI-b8-TQc"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="UpN-iR-CYM"/>
+                    <navigationItem key="navigationItem" id="UpN-iR-CYM">
+                        <barButtonItem key="rightBarButtonItem" systemItem="camera" id="RAi-bm-zVg">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="cameraButtonPressed:" destination="Oxa-4Z-Va6" id="CTn-E8-saA"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CLf-IV-KL7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
