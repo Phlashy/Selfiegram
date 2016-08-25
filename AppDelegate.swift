@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Parse
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,6 +17,48 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+        // Initialize Parse.
+        // Replace XXXX with the App ID and Client ID that Parse gives you
+        Parse.setApplicationId("t3GAduP0wHjfoB1h0Xo7tPJ0D9uTJ3sWfMcOGzNI",
+                               clientKey: "vvP1EPf8mK9yQdUro3vOeGDIvIU1SCBvxm4U5PUI")
+        
+        // A PFObject is an object that we can add or modify in Parse.
+        // We are adding an object of class type TestObject
+//        let testObject = PFObject(className: "TestObject")
+        
+        // We are setting the foo property on our object to be equal to bar
+//        testObject["foo"] = "bar"
+        
+        // We are saving our object to Parse
+//        testObject.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
+//            
+//            if success {
+//                
+//                // If this save was successful we print a successful statement
+//                print("Object has been saved.")
+//                
+//            }
+//        }
+        
+        let user = PFUser()
+        let username = "danny"
+        let password = "mathews"
+        user.username = username
+        user.password = password
+        user.signUpInBackgroundWithBlock { (success, error) -> Void in
+            if success {
+                print("successfully signed up a user")
+            }else {
+                PFUser.logInWithUsernameInBackground(username, password: password, block: { (user, error) -> Void in
+                    if let user = user {
+                        print("successfully logged in \(user)")
+                    }
+                })
+            }
+        }
+
+
         return true
     }
 
@@ -40,7 +83,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
 
 }
 

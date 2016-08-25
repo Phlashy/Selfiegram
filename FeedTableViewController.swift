@@ -21,14 +21,59 @@ class FeedTableViewController: UITableViewController, UIImagePickerControllerDel
             // Our definition of Post did not include the possibility of a nil UIImage
             // so, therefore we have to add a ! at the end of it
             
-            let me = User(username: "danny", profileImage: UIImage(named: "Grumpy-Cat")!)
-            let post0 = Post(image: UIImage(named: "Grumpy-Cat")!, user: me, comment: "Grumpy Cat 0")
-            let post1 = Post(image: UIImage(named: "Grumpy-Cat")!, user: me, comment: "Grumpy Cat 1")
-            let post2 = Post(image: UIImage(named: "Grumpy-Cat")!, user: me, comment: "Grumpy Cat 2")
-            let post3 = Post(image: UIImage(named: "Grumpy-Cat")!, user: me, comment: "Grumpy Cat 3")
-            let post4 = Post(image: UIImage(named: "Grumpy-Cat")!, user: me, comment: "Grumpy Cat 4")
+//            let me = User(username: "danny", profileImage: UIImage(named: "Grumpy-Cat")!)
+//            let post0 = Post(image: UIImage(named: "Grumpy-Cat")!, user: me, comment: "Grumpy Cat 0")
+//            let post1 = Post(image: UIImage(named: "Grumpy-Cat")!, user: me, comment: "Grumpy Cat 1")
+//            let post2 = Post(image: UIImage(named: "Grumpy-Cat")!, user: me, comment: "Grumpy Cat 2")
+//            let post3 = Post(image: UIImage(named: "Grumpy-Cat")!, user: me, comment: "Grumpy Cat 3")
+//            let post4 = Post(image: UIImage(named: "Grumpy-Cat")!, user: me, comment: "Grumpy Cat 4")
+//            
+//            posts = [post0, post1, post2, post3, post4]
             
-            posts = [post0, post1, post2, post3, post4]
+            let task = NSURLSession.sharedSession().dataTaskWithURL(NSURL(string: "https://www.flickr.com/services/rest/?method=flickr.photos.search&format=json&nojsoncallback=1&api_key=7fd764c86f789dcd96adbc07345e44b3&tags=cat")!) { (data, response, error) -> Void in
+               
+                
+                if let jsonUnformatted = try? NSJSONSerialization.JSONObjectWithData(data!, options: []),
+                    let json = jsonUnformatted as? [String : AnyObject],
+                    let photosDictionary = json["photos"] as? [String : AnyObject],
+                    let photosArray = photosDictionary["photo"] as? [[String : AnyObject]]
+                {
+                    
+                    for photo in photosArray {
+                        
+                        if let farmID = photo["farm"] as? Int,
+                            let serverID = photo["server"] as? String,
+                            let photoID = photo["id"] as? String,
+                            let secret = photo["secret"] as? String {
+                
+                        
+                        let photoURLString = "https://farm\(farmID).staticflickr.com/\(serverID)/\(photoID)_\(secret).jpg"
+                            if let photoURL = NSURL(string: photoURLString) {
+                            let me = User(username: "danny", profileImage: UIImage(named: "Grumpy-Cat")!)
+                            let post = Post(imageURL: photoURL, user: me, comment: "A Flickr Selfie")
+                            self.posts.append(post)
+                        
+                            }
+                        }
+                    
+                    }
+                    
+                    // We use dispatch_async because we need update all UI elements on the main thread.
+                    // This is a rule and you will see this again whenever you are updating UI.
+                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                        self.tableView.reloadData()
+                    })
+                    
+                }else{
+                    print("error with response data")
+                }
+                
+            }
+            
+//            this is called to start (or restart, if needed) our task:
+            task.resume()
+            
+            print ("outside dataTaskWithURL")
             
         }
 
@@ -47,7 +92,7 @@ class FeedTableViewController: UITableViewController, UIImagePickerControllerDel
     // MARK: - Table view data source
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return self.posts.count
     }
 
     
@@ -68,7 +113,27 @@ class FeedTableViewController: UITableViewController, UIImagePickerControllerDel
         
         let post = self.posts[indexPath.row]
         
-        cell.selfieImageView.image = post.image
+        // I've added this line to prevent flickering of images
+        // We are inside the cellForRowAtIndexPath method that gets called every time we layout a cell
+        // Because we are reusing "postCell" cells, a reused cell might have an image already set on it.
+        // This always resets the image to blank, waits for the image to download, and then sets it
+        
+        cell.selfieImageView.image = nil
+        
+        let task = NSURLSession.sharedSession().downloadTaskWithURL(post.imageURL) { (url, response, error) -> Void in
+            
+            if let imageURL = url,
+                let imageData = NSData(contentsOfURL: imageURL){
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    
+                    cell.selfieImageView.image = UIImage(data: imageData)
+                    
+                })
+            }
+        }
+        
+        task.resume()
+        
         cell.usernameLabel.text = post.user.username
         cell.commentLabel.text = post.comment
 
@@ -114,13 +179,15 @@ class FeedTableViewController: UITableViewController, UIImagePickerControllerDel
             
             //2. We create a Post object from the image
             let me = User(username: "danny", profileImage: UIImage(named: "Grumpy-Cat")!)
-            let post = Post(image: image, user: me, comment: "My Selfie")
+//            let post = Post(imageURL: image, user: me, comment: "My Selfie")
             
             //3. Add post to our posts array
             //    Adds it to the very top of our array
-            posts.insert(post, atIndex: 0)
+//            posts.insert(post, atIndex: 0)
             
         }
+        
+        
         
         //4. We remember to dismiss the Image Picker from our screen.
         dismissViewControllerAnimated(true, completion: nil)
