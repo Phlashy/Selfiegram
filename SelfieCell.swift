@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Parse
 
 class SelfieCell: UITableViewCell {
     
@@ -19,6 +20,17 @@ class SelfieCell: UITableViewCell {
         // Initialization code
     }
 
+    @IBAction func likeButtonPressed(sender: UIButton) {
+        
+        // the ! symbol means NOT
+        // We are therefore setting the button's selected state to
+        // the opposite of what it was. This is a great way to toggle
+        // a button from on to off and visa-versa
+        sender.selected = !sender.selected
+        
+    }
+    
+    
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

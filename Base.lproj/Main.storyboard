@@ -54,15 +54,38 @@
                                     <constraint firstAttribute="width" constant="180" id="NV1-N0-axp"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yVj-Id-83k">
-                                <rect key="frame" x="210" y="303" width="54" height="30"/>
-                                <state key="normal" title="Camera"/>
-                                <connections>
-                                    <action selector="cameraButtonPressed:" destination="QYh-Zn-mfd" eventType="touchUpInside" id="cEv-KL-s1H"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u14-yG-ziA">
-                                <rect key="frame" x="260.5" y="325" width="79" height="21"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="iP5-Ef-CHf">
+                                <rect key="frame" x="210" y="303" width="106" height="33"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="B53-cS-qdj">
+                                        <rect key="frame" x="0.0" y="0.0" width="106" height="33"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="pEA-4E-bNv">
+                                                <rect key="frame" x="0.0" y="0.0" width="106" height="33"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="tpF-4R-F1Z">
+                                                        <rect key="frame" x="0.0" y="0.0" width="106" height="33"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yVj-Id-83k">
+                                                                <rect key="frame" x="0.0" y="0.0" width="106" height="33"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                <state key="normal" title="Open Camera">
+                                                                    <color key="titleColor" red="0.50985940137629115" green="0.57098543887641695" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                                </state>
+                                                                <connections>
+                                                                    <action selector="cameraButtonPressed:" destination="QYh-Zn-mfd" eventType="touchUpInside" id="cEv-KL-s1H"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u14-yG-ziA">
+                                <rect key="frame" x="261" y="350" width="79" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -70,12 +93,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="u14-yG-ziA" firstAttribute="top" secondItem="dSb-Dy-aPf" secondAttribute="bottom" constant="30" id="7pd-VH-suM"/>
-                            <constraint firstItem="dSb-Dy-aPf" firstAttribute="leading" secondItem="yVj-Id-83k" secondAttribute="leading" id="DsK-os-4vF"/>
+                            <constraint firstItem="u14-yG-ziA" firstAttribute="top" secondItem="dSb-Dy-aPf" secondAttribute="bottom" constant="55" id="7pd-VH-suM"/>
                             <constraint firstItem="u14-yG-ziA" firstAttribute="centerX" secondItem="vUs-Os-NnL" secondAttribute="centerX" id="G5S-9z-l9x"/>
                             <constraint firstItem="dSb-Dy-aPf" firstAttribute="top" secondItem="DxD-8c-ks5" secondAttribute="bottom" constant="46" id="LQQ-Bh-0EC"/>
                             <constraint firstItem="dSb-Dy-aPf" firstAttribute="centerX" secondItem="vUs-Os-NnL" secondAttribute="centerX" id="nFj-yv-XT3"/>
-                            <constraint firstItem="yVj-Id-83k" firstAttribute="top" secondItem="dSb-Dy-aPf" secondAttribute="bottom" constant="8" id="y8b-fj-pXH"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="BCO-OI-uI1"/>
@@ -147,13 +168,27 @@
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oex-iI-Vmc">
+                                            <rect key="frame" x="569" y="266" width="23" height="20"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="23" id="8Vc-au-MdQ"/>
+                                                <constraint firstAttribute="height" constant="20" id="KYv-T7-Frl"/>
+                                            </constraints>
+                                            <state key="normal" image="hearts-off"/>
+                                            <state key="selected" image="hearts-on"/>
+                                            <connections>
+                                                <action selector="likeButtonPressed:" destination="TGq-zN-0ZN" eventType="touchUpInside" id="G5V-p8-Vno"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="xuY-yy-FYr" firstAttribute="top" secondItem="rQv-4c-3KJ" secondAttribute="topMargin" id="1kI-Z8-I19"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="xuY-yy-FYr" secondAttribute="trailing" id="8cm-hw-ojP"/>
                                         <constraint firstItem="mlS-Ja-ce6" firstAttribute="top" secondItem="xuY-yy-FYr" secondAttribute="bottom" constant="8" id="AkU-HY-QiW"/>
                                         <constraint firstItem="ZcC-z9-47U" firstAttribute="leading" secondItem="rQv-4c-3KJ" secondAttribute="leadingMargin" id="HOp-iC-cC1"/>
+                                        <constraint firstItem="oex-iI-Vmc" firstAttribute="top" secondItem="xuY-yy-FYr" secondAttribute="bottom" constant="8" id="VjZ-cg-7kN"/>
                                         <constraint firstItem="ZcC-z9-47U" firstAttribute="top" secondItem="mlS-Ja-ce6" secondAttribute="bottom" constant="8" id="YYy-4L-K8V"/>
+                                        <constraint firstAttribute="trailing" secondItem="oex-iI-Vmc" secondAttribute="trailing" constant="8" id="ZqC-jO-y8B"/>
                                         <constraint firstItem="xuY-yy-FYr" firstAttribute="leading" secondItem="rQv-4c-3KJ" secondAttribute="leadingMargin" id="rOX-dI-AmM"/>
                                         <constraint firstItem="mlS-Ja-ce6" firstAttribute="leading" secondItem="rQv-4c-3KJ" secondAttribute="leadingMargin" id="tfj-Vh-cLf"/>
                                     </constraints>
@@ -248,6 +283,8 @@
         <image name="Activities" width="25" height="25"/>
         <image name="NewsFeed" width="25" height="25"/>
         <image name="Profile" width="25" height="25"/>
+        <image name="hearts-off" width="42" height="37"/>
+        <image name="hearts-on" width="42" height="37"/>
         <image name="placeholder" width="256" height="256"/>
     </resources>
 </document>
