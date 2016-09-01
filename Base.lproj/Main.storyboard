@@ -177,7 +177,7 @@
                                             <state key="normal" image="hearts-off"/>
                                             <state key="selected" image="hearts-on"/>
                                             <connections>
-                                                <action selector="likeButtonPressed:" destination="TGq-zN-0ZN" eventType="touchUpInside" id="G5V-p8-Vno"/>
+                                                <action selector="likeButtonPressed:" destination="TGq-zN-0ZN" eventType="touchUpInside" id="RWt-oe-Fvx"/>
                                             </connections>
                                         </button>
                                     </subviews>
@@ -195,6 +195,7 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="commentLabel" destination="ZcC-z9-47U" id="Zba-xs-0eV"/>
+                                    <outlet property="likeButton" destination="oex-iI-Vmc" id="NuR-Vz-xee"/>
                                     <outlet property="selfieImageView" destination="xuY-yy-FYr" id="s93-3j-G2z"/>
                                     <outlet property="usernameLabel" destination="mlS-Ja-ce6" id="9QO-cS-xes"/>
                                 </connections>
