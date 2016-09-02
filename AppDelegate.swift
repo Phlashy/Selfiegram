@@ -47,7 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        }
         
         let user = PFUser()
-        let username = "danny"
+        let username = "El Gordo"
         let password = "mathews"
         user.username = username
         user.password = password
