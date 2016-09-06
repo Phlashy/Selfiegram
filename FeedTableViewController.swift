@@ -14,25 +14,44 @@ class FeedTableViewController: UITableViewController, UIImagePickerControllerDel
     var words = ["Hello", "my", "name", "is", "Selfigram"]
     var posts = [Post]()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
+    func getPosts() {
         if let query = Post.query() {
-            
-            query.orderByAscending("createdAt")
+            query.orderByDescending("createdAt")
             query.includeKey("user")
             query.findObjectsInBackgroundWithBlock({ (posts, error) -> Void in
                 
                 if let posts = posts as? [Post]{
-                    
                     self.posts = posts
                     self.tableView.reloadData()
-                    
+                    // remove the spinning circle if needed
+                    self.refreshControl?.endRefreshing()
                 }
                 
             })
-            
         }
+    }
+    
+    
+    @IBAction func doubleTappedSelfie(sender: UITapGestureRecognizer) {
+        
+        // get the location (x,y) position on our tableView where we have clicked
+        let tapLocation = sender.locationInView(tableView)
+        
+        // based on the x, y position we can get the indexPath for where we are at
+        if let indexPathAtTapLocation = tableView.indexPathForRowAtPoint(tapLocation){
+            
+            // based on the indexPath we can get the specific cell that is being tapped
+            let cell = tableView.cellForRowAtIndexPath(indexPathAtTapLocation) as! SelfieCell
+            
+            //run a method on that cell.
+            cell.tapAnimation()
+        }
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+       getPosts()
         
     }
 
@@ -43,6 +62,11 @@ class FeedTableViewController: UITableViewController, UIImagePickerControllerDel
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     
 
+    @IBAction func refreshPulled(sender: UIRefreshControl) {
+        
+        getPosts()
+        
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -50,6 +74,7 @@ class FeedTableViewController: UITableViewController, UIImagePickerControllerDel
 
     // MARK: - Table view data source
 
+    @IBOutlet weak var refreshPulled: UIRefreshControl!
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.posts.count
     }
