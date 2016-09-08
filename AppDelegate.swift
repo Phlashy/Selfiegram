@@ -25,8 +25,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         Activity.registerSubclass()
 
-        Parse.setApplicationId("t3GAduP0wHjfoB1h0Xo7tPJ0D9uTJ3sWfMcOGzNI",
-                               clientKey: "vvP1EPf8mK9yQdUro3vOeGDIvIU1SCBvxm4U5PUI")
+        Parse.setApplicationId("5CDeHX2xNhW11QZXr9AvtBbEQY0lft4jpUuMFt9g",
+                               clientKey: "SO1UFKR9k8RsLx1FsXzBjyI6IjsKxm2K0jcm48dG")
         
         // A PFObject is an object that we can add or modify in Parse.
         // We are adding an object of class type TestObject
